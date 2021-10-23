@@ -159,7 +159,7 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    if ((a + b >> c) && (c + b > a) && (a + c > b)) {
+    if ((a + b > c) && (c + b > a) && (a + c > b)) {
         val cosA = (c * c + b * b - a * a) / (2.0 * c * b)
         val cosB = (a * a + c * c - b * b) / (2.0 * a * c)
         val cosC = (a * a + b * b - c * c) / (2.0 * a * b)

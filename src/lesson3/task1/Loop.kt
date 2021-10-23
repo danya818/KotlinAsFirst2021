@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.sqrt
@@ -112,7 +113,7 @@ fun fib(n: Int): Int {
  */
 fun minDivisor(n: Int): Int {
     if (n % 2 == 0) return 2
-    for (divisor in 3..sqrt(n.toDouble())).toInt() step 2) if (n % divisor == 0) return divisor
+    for (divisor in 3..sqrt(n.toDouble()).toInt() step 2) if (n % divisor == 0) return divisor
     return n
 }
 
@@ -155,14 +156,14 @@ fun collatzSteps(x: Int): Int {
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int {
+fun nodOfNumbers(m: Int, n: Int): Int {
     var a = m
     var b = n
     while ((a != 0) && (b != 0)) if (a <= b) b %= a else a %= b
     return max(a, b)
 }
 
-fun lcm(m: Int, n: Int): Int = m / (m, n) * n
+fun lcm(m: Int, n: Int): Int = m / nodOfNumbers(m, n) * n
 
 
 /**
@@ -290,7 +291,7 @@ fun cos(x: Double, eps: Double): Double {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int {
+fun getNum(n: Int, operation: (Int) -> Int): Int {
     var step = 0
     var count = 0
     while (step < n) {
