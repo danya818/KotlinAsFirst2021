@@ -114,7 +114,20 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    val parts = jumps.split(" ")
+    var maxJump = -1
+    for (i in parts) {
+        if ((i != "%") && (i != "-"))
+            try {
+                val n = i.toIntOrNull() ?: return -1
+                maxJump = kotlin.math.max(maxJump, n)
+            } catch (e: NumberFormatException) {
+                return -1
+            }
+    }
+    return maxJump
+}
 
 /**
  * Сложная (6 баллов)
@@ -127,7 +140,18 @@ fun bestLongJump(jumps: String): Int = TODO()
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    val correctChars = setOf('+', '%', '-')
+    val parts = jumps.split(' ')
+    if (parts.size % 2 != 0) return -1
+    var bestResult = -1
+    for (i in parts.indices step 2) {
+        val result = parts[i].toIntOrNull() ?: return -1
+        if (!parts[i + 1].all { it in correctChars }) return -1
+        if ('+' in parts[i + 1]) bestResult = kotlin.math.max(bestResult, result)
+    }
+    return bestResult
+}
 
 /**
  * Сложная (6 баллов)
@@ -138,7 +162,23 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    val list = expression.split(' ')
+    require(list[0] != "")
+    var res = 0
+    var mark = 1
+    for ((ind, element) in list.withIndex()) {
+        if (ind % 2 == 0) {
+            require(element.all { it in '0'..'9' })
+            res += element.toInt() * mark
+        } else mark = when (element) {
+            "+" -> 1
+            "-" -> -1
+            else -> throw IllegalArgumentException()
+        }
+    }
+    return res
+}
 
 /**
  * Сложная (6 баллов)
@@ -162,7 +202,22 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    var mostExp = -1.0
+    var mostExpName = ""
+    val list = description.split("; ")
+    for (i in list) {
+        val parts = i.split(' ')
+        if (parts.size != 2) return ""
+        val num = parts[1].toDoubleOrNull()
+        if ((num == null) || (num < 0.0)) return ""
+        if (mostExp < num) {
+            mostExp = num
+            mostExpName = parts[0]
+        }
+    }
+    return mostExpName
+}
 
 /**
  * Сложная (6 баллов)
