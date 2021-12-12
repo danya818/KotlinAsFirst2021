@@ -102,7 +102,9 @@ fun dateDigitToStr(digital: String): String = TODO()
  *
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String =
+    if (!Regex("""^(\+\d+)?(\(\d+\))?\d+$""").matches(Regex("""[\s-]""").replace(phone, "")))
+        "" else Regex("""[\s-()]""").replace(phone, "")
 
 /**
  * Средняя (5 баллов)
@@ -189,7 +191,15 @@ fun plusMinus(expression: String): Int {
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    val list = str.split(' ')
+    var index = 0
+    for ((first, second) in list.zipWithNext()) {
+        if (first.lowercase() == second.lowercase()) return index
+        index += first.length + 1
+    }
+    return -1
+}
 
 /**
  * Сложная (6 баллов)
@@ -230,7 +240,34 @@ fun mostExpensive(description: String): String {
  *
  * Вернуть -1, если roman не является корректным римским числом
  */
-fun fromRoman(roman: String): Int = TODO()
+fun fromRoman(roman: String): Int {
+    var res = 0
+    val d = mapOf(
+        "M" to 1000, "CM" to 900, "DCCC" to 800, "DCC" to 700, "DC" to 600, "D" to 500,
+        "CD" to 400, "CCC" to 300, "CC" to 200, "C" to 100, "XC" to 90, "LXXX" to 80,
+        "LXX" to 70, "LX" to 60, "L" to 50, "XL" to 40, "XXX" to 30, "XX" to 20, "X" to 10,
+        "IX" to 9, "VIII" to 8, "VII" to 7, "VI" to 6, "V" to 5, "IV" to 4, "III" to 3, "II" to 2, "I" to 1
+    )
+    if (roman == "") return -1
+    var startIndex = 0
+    var endIndex = 0
+    var previewNum = 1001
+    while (startIndex < roman.length) {
+        var wasIn = false
+        while (roman.substring(startIndex, endIndex + 1) in d) {
+            wasIn = true
+            endIndex++
+            if (endIndex == roman.length) break
+        }
+        if (!wasIn) return -1
+        val newNum = d.getOrDefault(roman.substring(startIndex, endIndex), 0)
+        if (newNum > previewNum) return -1
+        res += newNum
+        previewNum = newNum
+        startIndex = endIndex
+    }
+    return res
+}
 
 /**
  * Очень сложная (7 баллов)
