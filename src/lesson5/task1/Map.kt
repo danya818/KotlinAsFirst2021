@@ -108,7 +108,7 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")) -> true
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = a.keys.all { (it in b) && (a[it] == b[it]) }
 
 /**
  * Простая (2 балла)
@@ -173,7 +173,15 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
+fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
+    val map = mutableMapOf<String, List<Double>>()
+    for ((stock, price) in stockPrices)
+        if (stock in map) map[stock] = map[stock]!! + price
+        else map[stock] = listOf(price)
+    val res = mutableMapOf<String, Double>()
+    for ((key, value) in map) res[key] = value.sum() / value.size.toDouble()
+    return res
+}
 
 /**
  * Средняя (4 балла)
@@ -210,7 +218,8 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
  * Например:
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
-fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
+fun canBuildFrom(chars: List<Char>, word: String): Boolean =
+    word.lowercase().toSet().intersect(chars.map { it.lowercase() }.toSet()) == word.lowercase().toSet()
 
 /**
  * Средняя (4 балла)
@@ -245,7 +254,20 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
  * Например:
  *   hasAnagrams(listOf("тор", "свет", "рот")) -> true
  */
-fun hasAnagrams(words: List<String>): Boolean = TODO()
+fun hasAnagrams(words: List<String>): Boolean {
+    for (i in words.indices) {
+        val word = words[i].toSet()
+        val mapA = mutableMapOf<Char, Int>()
+        for (char in words[i]) mapA[char] = mapA.getOrDefault(char, 0) + 1
+        for (j in i + 1 until words.size)
+            if (word == words[j].toSet()) {
+                val mapB = mutableMapOf<Char, Int>()
+                for (char in words[j]) mapB[char] = mapB.getOrDefault(char, 0) + 1
+                if (mapA == mapB) return true
+            }
+    }
+    return false
+}
 
 /**
  * Сложная (5 баллов)
