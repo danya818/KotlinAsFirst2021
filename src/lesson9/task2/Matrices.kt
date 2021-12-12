@@ -104,7 +104,14 @@ fun generateSnake(height: Int, width: Int): Matrix<Int> = TODO()
  * 4 5 6      8 5 2
  * 7 8 9      9 6 3
  */
-fun <E> rotate(matrix: Matrix<E>): Matrix<E> = TODO()
+fun <E> rotate(matrix: Matrix<E>): Matrix<E> {
+    require(matrix.height == matrix.width)
+    val newMatrix = createMatrix(matrix.height, matrix.width, matrix[0, 0])
+    for (i in 0 until matrix.height)
+        for (j in 0 until matrix.width)
+            newMatrix[j, matrix.width - 1 - i] = matrix[i, j]
+    return newMatrix
+}
 
 /**
  * Сложная (5 баллов)
@@ -119,7 +126,21 @@ fun <E> rotate(matrix: Matrix<E>): Matrix<E> = TODO()
  * 1 2 3
  * 3 1 2
  */
-fun isLatinSquare(matrix: Matrix<Int>): Boolean = TODO()
+fun isLatinSquare(matrix: Matrix<Int>): Boolean {
+    if (matrix.height != matrix.width) return false
+    val setN = (1..matrix.width).toSet()
+    for (i in 0 until matrix.height) {
+        val currentRow = mutableSetOf<Int>()
+        for (j in 0 until matrix.width) currentRow.add(matrix[i, j])
+        if (currentRow != setN) return false
+    }
+    for (j in 0 until matrix.width) {
+        val currentRow = mutableSetOf<Int>()
+        for (i in 0 until matrix.height) currentRow.add(matrix[i, j])
+        if (currentRow != setN) return false
+    }
+    return true
+}
 
 /**
  * Средняя (3 балла)
@@ -176,7 +197,14 @@ data class Holes(val rows: List<Int>, val columns: List<Int>)
  *
  * К примеру, центральный элемент 12 = 1 + 2 + 4 + 5, элемент в левом нижнем углу 12 = 1 + 4 + 7 и так далее.
  */
-fun sumSubMatrix(matrix: Matrix<Int>): Matrix<Int> = TODO()
+fun sumSubMatrix(matrix: Matrix<Int>): Matrix<Int> {
+    for (i in 1 until matrix.height) matrix[i, 0] += matrix[i - 1, 0]
+    for (j in 1 until matrix.width) matrix[0, j] += matrix[0, j - 1]
+    for (j in 1 until matrix.width)
+        for (i in 1 until matrix.height)
+            matrix[i, j] += matrix[i - 1, j] + matrix[i, j - 1] - matrix[i - 1, j - 1]
+    return matrix
+}
 
 /**
  * Простая (2 балла)
@@ -184,7 +212,13 @@ fun sumSubMatrix(matrix: Matrix<Int>): Matrix<Int> = TODO()
  * Инвертировать заданную матрицу.
  * При инвертировании знак каждого элемента матрицы следует заменить на обратный
  */
-operator fun Matrix<Int>.unaryMinus(): Matrix<Int> = TODO(this.toString())
+operator fun Matrix<Int>.unaryMinus(): Matrix<Int> {
+    val matrix = createMatrix(this.height, this.width, this[0, 0])
+    for (i in 0 until this.height)
+        for (j in 0 until this.width)
+            matrix[i, j] = this[i, j] * (-1)
+    return matrix
+}
 
 /**
  * Средняя (4 балла)
@@ -194,7 +228,18 @@ operator fun Matrix<Int>.unaryMinus(): Matrix<Int> = TODO(this.toString())
  * В противном случае бросить IllegalArgumentException.
  * Подробно про порядок умножения см. статью Википедии "Умножение матриц".
  */
-operator fun Matrix<Int>.times(other: Matrix<Int>): Matrix<Int> = TODO(this.toString())
+operator fun Matrix<Int>.times(other: Matrix<Int>): Matrix<Int> {
+    require(this.width == other.height)
+    val m = this.width
+    val res = createMatrix(this.height, other.width, 0)
+    for (i in 0 until res.height)
+        for (j in 0 until res.width) {
+            var sum = 0
+            for (r in 0 until m) sum += this[i, r] * other[r, j]
+            res[i, j] = sum
+        }
+    return res
+}
 
 /**
  * Сложная (7 баллов)
