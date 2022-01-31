@@ -4,6 +4,7 @@ package lesson9.task2
 
 import lesson9.task1.Matrix
 import lesson9.task1.createMatrix
+import kotlin.math.abs
 
 // Все задачи в этом файле требуют наличия реализации интерфейса "Матрица" в Matrix.kt
 
@@ -290,7 +291,27 @@ fun canOpenLock(key: Matrix<Int>, lock: Matrix<Int>): Triple<Boolean, Int, Int> 
  * 0  4 13  6
  * 3 10 11  8
  */
-fun fifteenGameMoves(matrix: Matrix<Int>, moves: List<Int>): Matrix<Int> = TODO()
+fun fifteenGameMoves(matrix: Matrix<Int>, moves: List<Int>) {
+    fun fifteenGameMoves(matrix: Matrix<Int>, moves: List<Int>): Matrix<Int> {
+        val map = mutableMapOf<Int, Pair<Int, Int>>()
+        for (i in 0 until matrix.height)
+            for (j in 0 until matrix.width)
+                map[matrix[i, j]] = i to j
+        for (move in moves) {
+            check(move in 1..15)
+            val cordsMove = map[move]!!
+            val (i, j) = cordsMove
+            val cordsNull = map[0]!!
+            val (iNull, jNull) = cordsNull
+            check(abs(iNull - i) == 1 && jNull == j || abs(jNull - j) == 1 && iNull == i)
+            map[0] = cordsMove
+            map[move] = cordsNull
+            matrix[i, j] = 0
+            matrix[iNull, jNull] = move
+        }
+        return matrix
+    }
+}
 
 /**
  * Очень сложная (32 балла)

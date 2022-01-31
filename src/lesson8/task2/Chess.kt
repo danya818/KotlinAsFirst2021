@@ -3,6 +3,7 @@
 package lesson8.task2
 
 import kotlin.math.abs
+import kotlin.math.sign
 
 /**
  * Клетка шахматной доски. Шахматная доска квадратная и имеет 8 х 8 клеток.
@@ -182,7 +183,19 @@ fun kingMoveNumber(start: Square, end: Square): Int {
  *          kingTrajectory(Square(3, 5), Square(6, 2)) = listOf(Square(3, 5), Square(4, 4), Square(5, 3), Square(6, 2))
  * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
  */
-fun kingTrajectory(start: Square, end: Square): List<Square> = TODO()
+fun kingTrajectory(start: Square, end: Square): List<Square> =
+    if (kingMoveNumber(start, end) == 0) listOf(start)
+    else {
+        var kingSquare = start
+        val resList = mutableListOf(kingSquare)
+        while (kingSquare != end) {
+            val dx = (end.column - kingSquare.column).sign
+            val dy = (end.row - kingSquare.row).sign
+            kingSquare = Square(kingSquare.column + dx, kingSquare.row + dy)
+            resList.add(kingSquare)
+        }
+        resList
+    }
 
 /**
  * Сложная (6 баллов)
@@ -207,26 +220,57 @@ fun kingTrajectory(start: Square, end: Square): List<Square> = TODO()
  * Пример: knightMoveNumber(Square(3, 1), Square(6, 3)) = 3.
  * Конь может последовательно пройти через клетки (5, 2) и (4, 4) к клетке (6, 3).
  */
-fun knightMoveNumber(start: Square, end: Square): Int = TODO()
+fun knightMoveNumber(start: Square, end: Square): Int = {
 
-/**
- * Очень сложная (10 баллов)
- *
- * Вернуть список из клеток, по которым шахматный конь может быстрее всего попасть из клетки start в клетку end.
- * Описание ходов коня см. предыдущую задачу.
- * Список всегда включает в себя клетку start. Клетка end включается, если она не совпадает со start.
- * Между ними должны находиться промежуточные клетки, по порядку от start до end.
- * Примеры:
- *
- * knightTrajectory(Square(3, 3), Square(3, 3)) = listOf(Square(3, 3))
- * здесь возможны другие варианты)
- * knightTrajectory(Square(3, 1), Square(6, 3)) = listOf(Square(3, 1), Square(5, 2), Square(4, 4), Square(6, 3))
- * (здесь возможен единственный вариант)
- * knightTrajectory(Square(3, 5), Square(5, 6)) = listOf(Square(3, 5), Square(5, 6))
- * (здесь опять возможны другие варианты)
- * knightTrajectory(Square(7, 7), Square(8, 8)) =
- *     listOf(Square(7, 7), Square(5, 8), Square(4, 6), Square(6, 7), Square(8, 8))
- *
- * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
- */
-fun knightTrajectory(start: Square, end: Square): List<Square> = TODO()
+
+    /**
+     * Очень сложная (10 баллов)
+     *
+     * Вернуть список из клеток, по которым шахматный конь может быстрее всего попасть из клетки start в клетку end.
+     * Описание ходов коня см. предыдущую задачу.
+     * Список всегда включает в себя клетку start. Клетка end включается, если она не совпадает со start.
+     * Между ними должны находиться промежуточные клетки, по порядку от start до end.
+     * Примеры:
+     *
+     * knightTrajectory(Square(3, 3), Square(3, 3)) = listOf(Square(3, 3))
+     * здесь возможны другие варианты)
+     * knightTrajectory(Square(3, 1), Square(6, 3)) = listOf(Square(3, 1), Square(5, 2), Square(4, 4), Square(6, 3))
+     * (здесь возможен единственный вариант)
+     * knightTrajectory(Square(3, 5), Square(5, 6)) = listOf(Square(3, 5), Square(5, 6))
+     * (здесь опять возможны другие варианты)
+     * knightTrajectory(Square(7, 7), Square(8, 8)) =
+     *     listOf(Square(7, 7), Square(5, 8), Square(4, 6), Square(6, 7), Square(8, 8))
+     *
+     * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
+     */
+    fun knightTrajectory(start: Square, end: Square): List<Square> {
+        require(start.inside() && end.inside())
+        //Воспользуюсь нахождением в ширину, с возобновлением пути по хеш-таблице
+        val knightMoves = listOf(
+            2 to 1, 2 to -1, 1 to -2, -1 to -2,
+            -2 to -1, -2 to 1, -1 to 2, 1 to 2
+        )
+        val visited = mutableSetOf(start)
+        val queue = mutableListOf(start)
+        val previewSquare = mutableMapOf(start to Square(-1, -1))
+        while (queue.isNotEmpty()) {
+            val currentSquare = queue[0]
+            if (currentSquare == end) break
+            visited += currentSquare
+            queue.remove(currentSquare)
+            for ((dX, dY) in knightMoves) {
+                val nextSquare = Square(currentSquare.column + dX, currentSquare.row + dY)
+                if (nextSquare.inside() && nextSquare !in visited) {
+                    queue.add(nextSquare)
+                    previewSquare[nextSquare] = currentSquare
+                }
+            }
+        }
+        val trajectory = mutableListOf<Square>()
+        var next = end
+        while (next != Square(-1, -1)) {
+            trajectory.add(0, next)
+            next = previewSquare[next]!!
+        }
+        return trajectory
+    }
