@@ -224,11 +224,13 @@ fun minCircleWith2Point(p: List<Point>, newPoint1: Point, newPoint2: Point): Cir
     for (point in p) if (!minCircle.contains(point)) minCircle = circleByThreePoints(point, newPoint1, newPoint2)
     return minCircle
 }
+
 fun minCircleWith1Point(p: List<Point>, newPoint: Point): Circle {
     var minCircle = circleByDiameter(Segment(p[0], newPoint))
     for (i in 1 until p.size) if (!minCircle.contains(p[i])) minCircle = minCircleWith2Point(p.take(i), newPoint, p[i])
     return minCircle
 }
+
 fun minContainingCircle(vararg points: Point): Circle {
     require(points.isNotEmpty())
     if (points.size == 1) return Circle(points[0], 0.0)

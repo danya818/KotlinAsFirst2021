@@ -344,7 +344,6 @@ fun main(args: Array<String>) {
 
 
 
-
 /**
  * Очень сложная (32 балла)
  *

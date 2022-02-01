@@ -221,7 +221,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
         }
     }
 
-
+}
 
     /**
      * Средняя (14 баллов)
@@ -323,22 +323,10 @@ fun alignFileByWidth(inputName: String, outputName: String) {
      * Обратите внимание: данная функция не имеет возвращаемого значения
      */
     fun chooseLongestChaoticWord(inputName: String, outputName: String) {
-        val res = mutableListOf<String>()
-        for (line in File(inputName).readLines()) {
-            val str = line.lowercase()
-            if (str.toSet().size == str.length) {
-                if (str.length > maxLen) {
-                    maxLen = str.length
-                    res.clear()
-                    res.add(line)
-                } else if (str.length == maxLen) res.add(line)
-            }
-        }
-        File(outputName).bufferedWriter().use { it.write(res.joinToString(", ")) }
-    }
 
 
-    /**
+
+        /**
      * Сложная (22 балла)
      *
      * Реализовать транслитерацию текста в заданном формате разметки в формат разметки HTML.
