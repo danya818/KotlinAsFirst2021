@@ -385,7 +385,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
      */
     fun markdownToHtmlSimple(inputName: String, outputName: String) {
         val text: String = File(inputName).readText().replace("\r", "").trim('\n')
-        val textList: MutableList<String> = mutableListOf("<html><body>", "<p>")
+        val textList = mutableListOf("<html><body>", "<p>")
         val map = mutableMapOf("**" to null, "*" to null, "~~" to null, "\n\n" to 1)
         var indexOfBeginString = 0
         var i = 0
