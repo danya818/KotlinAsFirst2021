@@ -5,6 +5,7 @@ package lesson9.task2
 import lesson9.task1.Matrix
 import lesson9.task1.createMatrix
 import kotlin.math.abs
+import kotlin.TODO as TODO1
 
 // Все задачи в этом файле требуют наличия реализации интерфейса "Матрица" в Matrix.kt
 
@@ -61,7 +62,7 @@ operator fun Matrix<Int>.plus(other: Matrix<Int>): Matrix<Int> {
  * 10 11 12  5
  *  9  8  7  6
  */
-fun generateSpiral(height: Int, width: Int): Matrix<Int> = TODO()
+fun generateSpiral(height: Int, width: Int): Matrix<Int> = TODO1()
 
 /**
  * Сложная (5 баллов)
@@ -77,7 +78,7 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> = TODO()
  *  1  2  2  2  2  1
  *  1  1  1  1  1  1
  */
-fun generateRectangles(height: Int, width: Int): Matrix<Int> = TODO()
+fun generateRectangles(height: Int, width: Int): Matrix<Int> = TODO1()
 
 /**
  * Сложная (5 баллов)
@@ -92,7 +93,7 @@ fun generateRectangles(height: Int, width: Int): Matrix<Int> = TODO()
  * 10 13 16 18
  * 14 17 19 20
  */
-fun generateSnake(height: Int, width: Int): Matrix<Int> = TODO()
+fun generateSnake(height: Int, width: Int): Matrix<Int> = TODO1()
 
 /**
  * Средняя (3 балла)
@@ -160,7 +161,7 @@ fun isLatinSquare(matrix: Matrix<Int>): Boolean {
  *
  * 42 ===> 0
  */
-fun sumNeighbours(matrix: Matrix<Int>): Matrix<Int> = TODO()
+fun sumNeighbours(matrix: Matrix<Int>): Matrix<Int> = TODO1()
 
 /**
  * Средняя (4 балла)
@@ -177,7 +178,7 @@ fun sumNeighbours(matrix: Matrix<Int>): Matrix<Int> = TODO()
  * 0 0 1 0
  * 0 0 0 0
  */
-fun findHoles(matrix: Matrix<Int>): Holes = TODO()
+fun findHoles(matrix: Matrix<Int>): Holes = TODO1()
 
 /**
  * Класс для описания местонахождения "дырок" в матрице
@@ -229,18 +230,7 @@ operator fun Matrix<Int>.unaryMinus(): Matrix<Int> {
  * В противном случае бросить IllegalArgumentException.
  * Подробно про порядок умножения см. статью Википедии "Умножение матриц".
  */
-operator fun Matrix<Int>.times(other: Matrix<Int>): Matrix<Int> {
-    require(this.width == other.height)
-    val m = this.width
-    val res = createMatrix(this.height, other.width, 0)
-    for (i in 0 until res.height)
-        for (j in 0 until res.width) {
-            var sum = 0
-            for (r in 0 until m) sum += this[i, r] * other[r, j]
-            res[i, j] = sum
-        }
-    return res
-}
+operator fun Matrix<Int>.times(other: Matrix<Int>): Matrix<Int> = TODO1()
 
 /**
  * Сложная (7 баллов)
@@ -262,7 +252,7 @@ operator fun Matrix<Int>.times(other: Matrix<Int>): Matrix<Int> {
  * Вернуть тройку (Triple) -- (да/нет, требуемый сдвиг по высоте, требуемый сдвиг по ширине).
  * Если наложение невозможно, то первый элемент тройки "нет" и сдвиги могут быть любыми.
  */
-fun canOpenLock(key: Matrix<Int>, lock: Matrix<Int>): Triple<Boolean, Int, Int> = TODO()
+fun canOpenLock(key: Matrix<Int>, lock: Matrix<Int>): Triple<Boolean, Int, Int> = TODO1()
 
 /**
  * Сложная (8 баллов)
@@ -383,4 +373,4 @@ fun main(args: Array<String>) {
  *
  * Перед решением этой задачи НЕОБХОДИМО решить предыдущую
  */
-fun fifteenGameSolution(matrix: Matrix<Int>): List<Int> = TODO()
+fun fifteenGameSolution(matrix: Matrix<Int>): List<Int> = TODO1()

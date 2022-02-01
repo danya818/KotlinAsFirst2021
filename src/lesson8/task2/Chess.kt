@@ -2,8 +2,6 @@
 
 package lesson8.task2
 
-import kotlin.math.abs
-import kotlin.math.sign
 import kotlin.TODO as TODO1
 
 /**
@@ -149,48 +147,6 @@ fun bishopTrajectory(start: Square, end: Square): List<Square> = TODO1()
  * Король может последовательно пройти через клетки (4, 2) и (5, 2) к клетке (6, 3).
  */
 fun kingMoveNumber(start: Square, end: Square) {
-
-
-/**
- * Сложная (5 баллов)
- *
- * Вернуть список из клеток, по которым шахматный король может быстрее всего попасть из клетки start в клетку end.
- * Описание ходов короля см. предыдущую задачу.
- * Список всегда включает в себя клетку start. Клетка end включается, если она не совпадает со start.
- * Между ними должны находиться промежуточные клетки, по порядку от start до end.
- * Примеры: kingTrajectory(Square(3, 3), Square(3, 3)) = listOf(Square(3, 3))
- *          (здесь возможны другие варианты)
- *          kingTrajectory(Square(3, 1), Square(6, 3)) = listOf(Square(3, 1), Square(4, 2), Square(5, 2), Square(6, 3))
- *          (здесь возможен единственный вариант)
- *          kingTrajectory(Square(3, 5), Square(6, 2)) = listOf(Square(3, 5), Square(4, 4), Square(5, 3), Square(6, 2))
- * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
- */
-fun kingTrajectory(start: Square, end: Square): List<Square> = TODO1()
-
-/**
- * Сложная (6 баллов)
- *
- * Определить число ходов, за которое шахматный конь пройдёт из клетки start в клетку end.
- * Шахматный конь одним ходом вначале передвигается ровно на 2 клетки по горизонтали или вертикали,
- * а затем ещё на 1 клетку под прямым углом, образуя букву "Г".
- * Ниже точками выделены возможные ходы коня, а крестиками -- невозможные:
- *
- * .xxx.xxx
- * xxKxxxxx
- * .xxx.xxx
- * x.x.xxxx
- * xxxxxxxx
- * xxxxxxxx
- * xxxxxxxx
- * xxxxxxxx
- *
- * Если клетки start и end совпадают, вернуть 0.
- * Если любая из клеток некорректна, бросить IllegalArgumentException().
- *
- * Пример: knightMoveNumber(Square(3, 1), Square(6, 3)) = 3.
- * Конь может последовательно пройти через клетки (5, 2) и (4, 4) к клетке (6, 3).
- */
-fun knightMoveNumber(start: Square, end: Square): Int = TODO1()
 
 
     /**
