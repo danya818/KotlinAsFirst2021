@@ -291,27 +291,59 @@ fun canOpenLock(key: Matrix<Int>, lock: Matrix<Int>): Triple<Boolean, Int, Int> 
  * 0  4 13  6
  * 3 10 11  8
  */
-fun fifteenGameMoves(matrix: Matrix<Int>, moves: List<Int>) {
-    fun fifteenGameMoves(matrix: Matrix<Int>, moves: List<Int>): Matrix<Int> {
-        val map = mutableMapOf<Int, Pair<Int, Int>>()
-        for (i in 0 until matrix.height)
-            for (j in 0 until matrix.width)
-                map[matrix[i, j]] = i to j
-        for (move in moves) {
-            check(move in 1..15)
-            val cordsMove = map[move]!!
-            val (i, j) = cordsMove
-            val cordsNull = map[0]!!
-            val (iNull, jNull) = cordsNull
-            check(abs(iNull - i) == 1 && jNull == j || abs(jNull - j) == 1 && iNull == i)
-            map[0] = cordsMove
-            map[move] = cordsNull
-            matrix[i, j] = 0
-            matrix[iNull, jNull] = move
-        }
-        return matrix
+class Matrix<T: Number>(array: Array<Array<T>>) {
+    private val matrix = array
+    val width: Int = matrix[0].size
+    val height: Int = matrix.size
+
+    operator fun get(i: Int, j: Int): T {
+        return matrix[i][j]
+    }
+
+    operator fun set(i: Int, j: Int, value: T) {
+        matrix[i][j] = value
     }
 }
+
+fun fifteenGameMoves(matrix: lesson9.task2.Matrix<Int>, moves: List<Int>): lesson9.task2.Matrix<Int> {
+    val map = mutableMapOf<Int, Pair<Int, Int>>()
+    for (i in 0 until matrix.height)
+        for (j in 0 until matrix.width)
+            map[matrix[i, j]] = i to j
+    for (move in moves) {
+        check(move in 1..15)
+        val cordsMove = map[move]!!
+        val (i, j) = cordsMove
+        val cordsNull = map[0]!!
+        val (iNull, jNull) = cordsNull
+        check(abs(iNull - i) == 1 && jNull == j || abs(jNull - j) == 1 && iNull == i)
+        map[0] = cordsMove
+        map[move] = cordsNull
+        matrix[i, j] = 0
+        matrix[iNull, jNull] = move
+    }
+    return matrix
+}
+
+fun main(args: Array<String>) {
+    val matrix = Matrix(arrayOf(
+        arrayOf(5, 7, 9, 1),
+        arrayOf(2, 12, 14, 15),
+        arrayOf(3, 4, 6, 8),
+        arrayOf(10, 11, 13, 0)))
+
+    val moves = listOf(8, 6, 13, 11, 10, 3)
+
+    val result = fifteenGameMoves(matrix, moves)
+    for (i in 0 until result.height) {
+        println()
+        for (j in 0 until result.width)
+            print(result[i, j].toString() + " ")
+    }
+}
+
+
+
 
 /**
  * Очень сложная (32 балла)

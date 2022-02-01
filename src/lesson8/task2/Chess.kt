@@ -220,7 +220,7 @@ fun kingTrajectory(start: Square, end: Square): List<Square> =
  * Пример: knightMoveNumber(Square(3, 1), Square(6, 3)) = 3.
  * Конь может последовательно пройти через клетки (5, 2) и (4, 4) к клетке (6, 3).
  */
-fun knightMoveNumber(start: Square, end: Square): Int = {
+fun knightMoveNumber(start: Square, end: Square): Int = TODO()
 
 
     /**
@@ -245,7 +245,7 @@ fun knightMoveNumber(start: Square, end: Square): Int = {
      */
     fun knightTrajectory(start: Square, end: Square): List<Square> {
         require(start.inside() && end.inside())
-        //Воспользуюсь нахождением в ширину, с возобновлением пути по хеш-таблице
+        //Воспользуюсь нахождением в ширину, с восстановлением пути по хеш-таблице
         val knightMoves = listOf(
             2 to 1, 2 to -1, 1 to -2, -1 to -2,
             -2 to -1, -2 to 1, -1 to 2, 1 to 2
@@ -274,3 +274,5 @@ fun knightMoveNumber(start: Square, end: Square): Int = {
         }
         return trajectory
     }
+
+
