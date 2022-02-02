@@ -6,6 +6,7 @@ import lesson9.task1.Matrix
 import lesson9.task1.createMatrix
 import kotlin.math.abs
 import kotlin.TODO as TODO1
+import kotlin.TODO as KotlinTODO
 
 // Все задачи в этом файле требуют наличия реализации интерфейса "Матрица" в Matrix.kt
 
@@ -62,7 +63,7 @@ operator fun Matrix<Int>.plus(other: Matrix<Int>): Matrix<Int> {
  * 10 11 12  5
  *  9  8  7  6
  */
-fun generateSpiral(height: Int, width: Int): Matrix<Int> = TODO1()
+fun generateSpiral(height: Int, width: Int): Matrix<Int> = KotlinTODO()
 
 /**
  * Сложная (5 баллов)
@@ -78,7 +79,7 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> = TODO1()
  *  1  2  2  2  2  1
  *  1  1  1  1  1  1
  */
-fun generateRectangles(height: Int, width: Int): Matrix<Int> = TODO1()
+fun generateRectangles(height: Int, width: Int): Matrix<Int> = KotlinTODO()
 
 /**
  * Сложная (5 баллов)
@@ -93,7 +94,7 @@ fun generateRectangles(height: Int, width: Int): Matrix<Int> = TODO1()
  * 10 13 16 18
  * 14 17 19 20
  */
-fun generateSnake(height: Int, width: Int): Matrix<Int> = TODO1()
+fun generateSnake(height: Int, width: Int): Matrix<Int> = KotlinTODO()
 
 /**
  * Средняя (3 балла)
@@ -161,7 +162,7 @@ fun isLatinSquare(matrix: Matrix<Int>): Boolean {
  *
  * 42 ===> 0
  */
-fun sumNeighbours(matrix: Matrix<Int>): Matrix<Int> = TODO1()
+fun sumNeighbours(matrix: Matrix<Int>): Matrix<Int> = KotlinTODO()
 
 /**
  * Средняя (4 балла)
@@ -178,7 +179,7 @@ fun sumNeighbours(matrix: Matrix<Int>): Matrix<Int> = TODO1()
  * 0 0 1 0
  * 0 0 0 0
  */
-fun findHoles(matrix: Matrix<Int>): Holes = TODO1()
+fun findHoles(matrix: Matrix<Int>): Holes = KotlinTODO()
 
 /**
  * Класс для описания местонахождения "дырок" в матрице
@@ -230,7 +231,7 @@ operator fun Matrix<Int>.unaryMinus(): Matrix<Int> {
  * В противном случае бросить IllegalArgumentException.
  * Подробно про порядок умножения см. статью Википедии "Умножение матриц".
  */
-operator fun Matrix<Int>.times(other: Matrix<Int>): Matrix<Int> = TODO1()
+operator fun Matrix<Int>.times(other: Matrix<Int>): Matrix<Int> = KotlinTODO()
 
 /**
  * Сложная (7 баллов)
@@ -252,7 +253,7 @@ operator fun Matrix<Int>.times(other: Matrix<Int>): Matrix<Int> = TODO1()
  * Вернуть тройку (Triple) -- (да/нет, требуемый сдвиг по высоте, требуемый сдвиг по ширине).
  * Если наложение невозможно, то первый элемент тройки "нет" и сдвиги могут быть любыми.
  */
-fun canOpenLock(key: Matrix<Int>, lock: Matrix<Int>): Triple<Boolean, Int, Int> = TODO1()
+fun canOpenLock(key: Matrix<Int>, lock: Matrix<Int>): Triple<Boolean, Int, Int> = KotlinTODO()
 
 /**
  * Сложная (8 баллов)
@@ -373,4 +374,4 @@ fun main(args: Array<String>) {
  *
  * Перед решением этой задачи НЕОБХОДИМО решить предыдущую
  */
-fun fifteenGameSolution(matrix: Matrix<Int>): List<Int> = TODO1()
+fun fifteenGameSolution(matrix: Matrix<Int>): List<Int> = KotlinTODO()

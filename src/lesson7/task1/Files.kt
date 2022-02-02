@@ -322,7 +322,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
      *
      * Обратите внимание: данная функция не имеет возвращаемого значения
      */
-    fun chooseLongestChaoticWord(inputName: String, outputName: String) {
+    fun chooseLongestChaoticWord(inputName: String, outputName: String) {}
 
 
 
@@ -420,4 +420,4 @@ fun alignFileByWidth(inputName: String, outputName: String) {
     }
 
 
-    }
+

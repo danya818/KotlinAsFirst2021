@@ -146,7 +146,7 @@ fun bishopTrajectory(start: Square, end: Square): List<Square> = TODO1()
  * Пример: kingMoveNumber(Square(3, 1), Square(6, 3)) = 3.
  * Король может последовательно пройти через клетки (4, 2) и (5, 2) к клетке (6, 3).
  */
-fun kingMoveNumber(start: Square, end: Square) {
+fun kingMoveNumber(start: Square, end: Square) {}
 
 
     /**
@@ -200,7 +200,7 @@ fun kingMoveNumber(start: Square, end: Square) {
         }
         return trajectory
     }
-}
+
 
 
 

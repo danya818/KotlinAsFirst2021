@@ -139,25 +139,16 @@ class Line private constructor(val b: Double, val angle: Double) {
     }
 
     constructor(point: Point, angle: Double) : this(point.y * cos(angle) - point.x * sin(angle), angle)
-
+}
     /**
      * Средняя (3 балла)
      *
      * Найти точку пересечения с другой линией.
      * Для этого необходимо составить и решить систему из двух уравнений (каждое для своей прямой)
      */
-    fun crossPoint(other: Line): Point = TODO1()
+    fun crossPoint(other: Line): Nothing = TODO1()
 
-    override fun equals(other: Any?) = other is Line && angle == other.angle && b == other.b
 
-    override fun hashCode(): Int {
-        var result = b.hashCode()
-        result = 31 * result + angle.hashCode()
-        return result
-    }
-
-    override fun toString() = "Line(${cos(angle)} * y = ${sin(angle)} * x + $b)"
-}
 
 /**
  * Средняя (3 балла)
@@ -237,4 +228,6 @@ fun minContainingCircle(vararg points: Point): Circle {
         if (!minCircle.contains(p[i])) minCircle = minCircleWith1Point(p.take(i).shuffled(), p[i])
     return minCircle
 }
+
+
 
